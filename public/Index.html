@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local Media Downloader</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Local Media Downloader</h1>
+      <p class="subtitle">Download, then stream video and music over your local network.</p>
+    </header>
+
+    <section class="download-form">
+      <input type="text" id="urlInput" placeholder="Paste a video link here...">
+      <select id="typeSelect">
+        <option value="video">Video (up to 1080p)</option>
+        <option value="audio">Audio (MP3)</option>
+      </select>
+      <button id="downloadBtn">Download</button>
+    </section>
+
+    <p id="status" class="status"></p>
+
+    <section>
+      <h2>Library</h2>
+      <div id="library" class="library"></div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
