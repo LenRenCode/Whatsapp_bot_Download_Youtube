@@ -72,13 +72,60 @@ Example:
   projects, but be aware unofficial clients carry some risk of account
   restrictions if used for high-volume or spammy behavior.
 
+## Local network web version
+
+There's also a small web app that does the same downloading, but through a
+browser instead of WhatsApp — and it keeps a library you can stream from any
+device on your Wi-Fi/LAN (phone, tablet, smart TV browser, etc.), not just
+the computer running it.
+
+### Run it
+
+```bash
+npm install
+node server.js
+```
+
+The terminal will print two links:
+
+```
+✅ On this computer:        http://localhost:3000
+✅ From other LAN devices:  http://192.168.x.x:3000
+```
+
+Open the first link on the same machine, or the second link from any other
+device connected to the **same Wi-Fi/router**. Paste a link, pick Video or
+Audio, and hit Download — it'll show up in the library below with a built-in
+player you can stream from (seeking/scrubbing works normally).
+
+You can run the WhatsApp bot (`node index.js`) and the web server
+(`node server.js`) at the same time, in two separate terminals — they don't
+interfere with each other.
+
+### Local-only by design
+
+The server checks each request's IP and rejects anything outside private
+network ranges (`192.168.x.x`, `10.x.x.x`, `172.16-31.x.x`, `localhost`), so
+it won't respond even if a router happens to expose the port externally.
+That said, on the LAN itself there's no login — anyone on the same
+Wi-Fi/network can open the page. If that network is shared with people you
+don't trust (e.g. shared/public Wi-Fi), don't run this there, or add basic
+authentication (e.g. the `express-basic-auth` package) in front of the
+routes in `server.js`.
+
 ## Project structure
 
 ```
 wa-media-bot/
-├── index.js              # Bot entry point (connection + command handling)
+├── index.js              # WhatsApp bot entry point
+├── server.js             # Local-network web server (download + stream)
+├── public/                # Web frontend (served by server.js)
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+├── downloads/             # Created automatically; stores web-downloaded media
 ├── utils/
-│   └── downloader.js     # yt-dlp wrappers for video/audio download
+│   └── downloader.js     # yt-dlp wrappers (video, audio, metadata)
 ├── package.json
 └── README.md
 ```
