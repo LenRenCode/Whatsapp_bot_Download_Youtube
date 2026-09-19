@@ -1,7 +1,8 @@
-# WA Media Bot
+# WhatsApp YouTube Media Bot
 
-A WhatsApp bot (using [Baileys](https://github.com/WhiskeySockets/Baileys)) that
-downloads video (up to 1080p) or audio from a link sent in chat, using `yt-dlp`.
+A WhatsApp bot and local-network web app for downloading video or audio from
+supported links using `yt-dlp`. The WhatsApp integration uses
+[Baileys](https://github.com/WhiskeySockets/Baileys).
 
 ## Requirements
 
@@ -19,9 +20,9 @@ downloads video (up to 1080p) or audio from a link sent in chat, using `yt-dlp`.
 ## Setup
 
 ```bash
-cd wa-media-bot
+cd Whatsapp_bot_Download_Youtube
 npm install
-node index.js
+node Index.js
 ```
 
 A QR code will print in your terminal. Open WhatsApp on your phone →
@@ -56,7 +57,7 @@ Example:
 - **File size**: WhatsApp has practical media size limits. Very long or
   high-bitrate 1080p videos may download fine but fail to send. If that
   happens, consider capping resolution lower (edit the `-f` selector in
-  `utils/downloader.js`) or trimming the video.
+  `utils/Downloader.js`) or trimming the video.
 - **Sources**: `yt-dlp` supports YouTube and many other sites. Whether a given
   link works depends on that site's structure and yt-dlp's current support
   for it — keep `yt-dlp` updated (`pip install -U yt-dlp` or `yt-dlp -U`)
@@ -83,7 +84,7 @@ the computer running it.
 
 ```bash
 npm install
-node server.js
+node Server.js
 ```
 
 The terminal will print two links:
@@ -116,16 +117,16 @@ routes in `server.js`.
 ## Project structure
 
 ```
-wa-media-bot/
+Whatsapp_bot_Download_Youtube/
 ├── index.js              # WhatsApp bot entry point
 ├── server.js             # Local-network web server (download + stream)
 ├── public/                # Web frontend (served by server.js)
-│   ├── index.html
-│   ├── style.css
-│   └── app.js
+│   ├── Index.html
+│   ├── Style.css
+│   └── App.js
 ├── downloads/             # Created automatically; stores web-downloaded media
 ├── utils/
-│   └── downloader.js     # yt-dlp wrappers (video, audio, metadata)
+│   └── Downloader.js      # yt-dlp wrappers for video and audio
 ├── package.json
 └── README.md
 ```
